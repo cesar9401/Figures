@@ -1,8 +1,11 @@
 package com.cesar31.figures.lexerandparser;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.cesar31.figures.reports.*;
 import com.cesar31.figures.graph.*;
-
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +19,17 @@ parser code {:
 
 	public parser(FigureLex lex) {
                 super(lex);
+                // parsed
                 this.parsed = true;
+                // Reporte de errores
                 this.handleErrors = new HandleError();
+                // Contenedor de figuras
                 this.container = new FigureContainer();
 	}
 
 	public void unrecovered_syntax_error(Symbol cur_token) {
                 /* parsed */
                 this.parsed = false;
-                /**/
 
                 System.out.println("unrecovered_syntax_error");
                 System.out.println("cur_token: " + symbl_name_from_id(cur_token.sym));
@@ -36,51 +41,48 @@ parser code {:
                 /**/
 
                 System.out.println("report_error");
-                System.out.println(message);
+                System.out.println("Message: " + message);
                 System.out.println("Object info: " + info);
 	}
 
 	public void report_fatal_error(String message, Object info) {
                 /* parsed */
                 this.parsed = false;
-                /**/
 
                 System.out.println("report_fatal_error");
                 System.out.println("Message: " + message);
                 System.out.println("Object info: " + info);
 
+                /* Armando reportes de errores */
+                List<String> expected = new ArrayList<>();
                 List<Integer> tokens = expected_token_ids();
-                System.out.println("Imprimiendo listado");
                 for(Integer i : tokens) {
-                        System.out.println(symbl_name_from_id(i));
+                        expected.add(symbl_name_from_id(i));
                 }
+
+                /* Reporte de errores */
+                this.handleErrors.setError(cur_token, symbl_name_from_id(cur_token.sym), expected);
 	}
 
 	public void syntax_error(Symbol cur_token) {
                 /* parsed */
                 this.parsed = false;
-                /**/
 
-                List<String> expected = new ArrayList<>();
-
+                /* Symbol que provoca sintax_error */
                 this.cur_token = cur_token;
-                System.out.printf("syntax_error: Linea: %d, columna: %d, sym: %s, nombre: %s, value: \"%s\", parse_state: %d\n", cur_token.left, cur_token.right, cur_token.sym, symbl_name_from_id(cur_token.sym), cur_token.value, cur_token.parse_state);
 
+                /* Armando reportes de errores */
+                List<String> expected = new ArrayList<>();
                 List<Integer> tokens = expected_token_ids();
-                System.out.print("Se esperaba ->");
                 for(Integer i : tokens) {
-                        System.out.printf("%s, ", symbl_name_from_id(i));
                         expected.add(symbl_name_from_id(i));
                 }
-                System.out.println("");
 
                 /* Reporte de errores */
                 this.handleErrors.setError(cur_token, symbl_name_from_id(cur_token.sym), expected);
 	}
 
 	public Symbol getCur_token() {
-                System.out.println("getCur_token");
-                System.out.printf("syntax_error: Linea: %d, columna: %d, sym: %s, nombre: %s, value: \"%s\", parse_state: %d\n", cur_token.left, cur_token.right, cur_token.sym, symbl_name_from_id(cur_token.sym), cur_token.value, cur_token.parse_state);
                 return this.cur_token;
         }
 
@@ -119,27 +121,27 @@ expr    ::=     draw anim expr
 draw    ::=     GRAPH CIRCLE draw4:circle
                 {:
                         container.setFour((DrawFour)circle, "circulo");
-                        System.out.println(" <- circulo");
+                        // System.out.println(" <- circulo");
                 :}
                 | GRAPH SQUARE draw4:square
                 {:
                         container.setFour((DrawFour)square, "cuadrado");
-                        System.out.println(" <- cuadrado");
+                        // System.out.println(" <- cuadrado");
                 :}
                 | GRAPH RCTNGL draw5:rectangle
                 {:
                         container.setFive((DrawFive) rectangle, "rectangulo");
-                        System.out.println(" <- rectangulo");
+                        // System.out.println(" <- rectangulo");
                 :}
                 | GRAPH LINE draw5:line
                 {:
                         container.setFive((DrawFive) line, "linea");
-                        System.out.println(" <- linea");
+                        // System.out.println(" <- linea");
                 :}
                 | GRAPH POLYGN draw6:polygon
                 {:
                         container.setPolygon((Polygon) polygon);
-                        System.out.println(" <- poligono");
+                        // System.out.println(" <- poligono");
                 :}
                 | error draw4
                 {: System.out.println("draw ::= error draw4"); :}
@@ -152,28 +154,28 @@ draw    ::=     GRAPH CIRCLE draw4:circle
 draw4   ::=     LPAREN s:x COMMA s:y COMMA s:r COMMA clr:color RPAREN
                 {:
                         RESULT = new DrawFour(x, y, r, (String)color);
-                        System.out.printf("draw4(%d, %d, %d, %s)", x, y, r, color);
+                        // System.out.printf("draw4(%d, %d, %d, %s)", x, y, r, color);
                 :}
                 ;
 
 draw5   ::=     LPAREN s:x COMMA s:y COMMA s:h COMMA s:w COMMA clr:color RPAREN
                 {:
                         RESULT = new DrawFive(x, y, h, w, (String)color);
-                        System.out.printf("draw5(%d, %d, %d, %d, %s)", x, y, h, w, color);
+                        // System.out.printf("draw5(%d, %d, %d, %d, %s)", x, y, h, w, color);
                 :}
                 ;
 
 draw6   ::=     LPAREN s:x COMMA s:y COMMA s:h COMMA s:w COMMA s:n COMMA clr:color RPAREN
                 {:
                         RESULT = new Polygon(x, y, h, w, n, (String) color);
-                        System.out.printf("draw6(%d, %d, %d, %d, %d, %s)", x, y, h, w, n, color);
+                        // System.out.printf("draw6(%d, %d, %d, %d, %d, %s)", x, y, h, w, n, color);
                 :}
                 ;
 
 anim    ::=     ANIMT OBJ ANT opan:animation
                 {:
                         container.setAnimation((Animation) animation);
-                        System.out.println(" <- animar objeto anterior");
+                       //  System.out.println(" <- animar objeto anterior");
                 :}
                 | error opan
                 {: System.out.println("anim ::= error opan"); :}
@@ -182,7 +184,7 @@ anim    ::=     ANIMT OBJ ANT opan:animation
 opan    ::=     LPAREN s:xf COMMA s:yf COMMA kanim:kind RPAREN
                 {:
                         RESULT = new Animation(xf, yf, (String)kind);
-                        System.out.printf("opan(%d, %d, %s)", xf, yf, kind);
+                        // System.out.printf("opan(%d, %d, %s)", xf, yf, kind);
                 :}
                 ;
 

@@ -5,6 +5,8 @@
 
 package com.cesar31.figures.lexerandparser;
 
+import android.os.Build;
+import androidx.annotation.RequiresApi;
 import com.cesar31.figures.reports.*;
 import com.cesar31.figures.graph.*;
 import java_cup.runtime.Symbol;
@@ -224,6 +226,7 @@ public class parser extends java_cup.runtime.lr_parser {
     }
 
   /** Invoke a user supplied parse action. */
+  @RequiresApi(api = Build.VERSION_CODES.N)
   public java_cup.runtime.Symbol do_action(
     int                        act_num,
     java_cup.runtime.lr_parser parser,
@@ -256,15 +259,17 @@ public class parser extends java_cup.runtime.lr_parser {
 
 	public parser(FigureLex lex) {
                 super(lex);
+                // parsed
                 this.parsed = true;
+                // Reporte de errores
                 this.handleErrors = new HandleError();
+                // Contenedor de figuras
                 this.container = new FigureContainer();
 	}
 
 	public void unrecovered_syntax_error(Symbol cur_token) {
                 /* parsed */
                 this.parsed = false;
-                /**/
 
                 System.out.println("unrecovered_syntax_error");
                 System.out.println("cur_token: " + symbl_name_from_id(cur_token.sym));
@@ -276,51 +281,48 @@ public class parser extends java_cup.runtime.lr_parser {
                 /**/
 
                 System.out.println("report_error");
-                System.out.println(message);
+                System.out.println("Message: " + message);
                 System.out.println("Object info: " + info);
 	}
 
 	public void report_fatal_error(String message, Object info) {
                 /* parsed */
                 this.parsed = false;
-                /**/
 
                 System.out.println("report_fatal_error");
                 System.out.println("Message: " + message);
                 System.out.println("Object info: " + info);
 
+                /* Armando reportes de errores */
+                List<String> expected = new ArrayList<>();
                 List<Integer> tokens = expected_token_ids();
-                System.out.println("Imprimiendo listado");
                 for(Integer i : tokens) {
-                        System.out.println(symbl_name_from_id(i));
+                        expected.add(symbl_name_from_id(i));
                 }
+
+                /* Reporte de errores */
+                this.handleErrors.setError(cur_token, symbl_name_from_id(cur_token.sym), expected);
 	}
 
 	public void syntax_error(Symbol cur_token) {
                 /* parsed */
                 this.parsed = false;
-                /**/
 
-                List<String> expected = new ArrayList<>();
-
+                /* Symbol que provoca sintax_error */
                 this.cur_token = cur_token;
-                System.out.printf("syntax_error: Linea: %d, columna: %d, sym: %s, nombre: %s, value: \"%s\", parse_state: %d\n", cur_token.left, cur_token.right, cur_token.sym, symbl_name_from_id(cur_token.sym), cur_token.value, cur_token.parse_state);
 
+                /* Armando reportes de errores */
+                List<String> expected = new ArrayList<>();
                 List<Integer> tokens = expected_token_ids();
-                System.out.print("Se esperaba ->");
                 for(Integer i : tokens) {
-                        System.out.printf("%s, ", symbl_name_from_id(i));
                         expected.add(symbl_name_from_id(i));
                 }
-                System.out.println("");
 
                 /* Reporte de errores */
                 this.handleErrors.setError(cur_token, symbl_name_from_id(cur_token.sym), expected);
 	}
 
 	public Symbol getCur_token() {
-                System.out.println("getCur_token");
-                System.out.printf("syntax_error: Linea: %d, columna: %d, sym: %s, nombre: %s, value: \"%s\", parse_state: %d\n", cur_token.left, cur_token.right, cur_token.sym, symbl_name_from_id(cur_token.sym), cur_token.value, cur_token.parse_state);
                 return this.cur_token;
         }
 
@@ -353,6 +355,7 @@ class CUP$parser$actions {
   }
 
   /** Method 0 with the actual generated action code for actions 0 to 300. */
+  @RequiresApi(api = Build.VERSION_CODES.N)
   public final java_cup.runtime.Symbol CUP$parser$do_action_part00000000(
     int                        CUP$parser$act_num,
     java_cup.runtime.lr_parser CUP$parser$parser,
@@ -434,7 +437,7 @@ class CUP$parser$actions {
 		Object circle = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
                         container.setFour((DrawFour)circle, "circulo");
-                        System.out.println(" <- circulo");
+                        // System.out.println(" <- circulo");
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -449,7 +452,7 @@ class CUP$parser$actions {
 		Object square = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
                         container.setFour((DrawFour)square, "cuadrado");
-                        System.out.println(" <- cuadrado");
+                        // System.out.println(" <- cuadrado");
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -464,7 +467,7 @@ class CUP$parser$actions {
 		Object rectangle = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
                         container.setFive((DrawFive) rectangle, "rectangulo");
-                        System.out.println(" <- rectangulo");
+                        // System.out.println(" <- rectangulo");
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -479,7 +482,7 @@ class CUP$parser$actions {
 		Object line = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
                         container.setFive((DrawFive) line, "linea");
-                        System.out.println(" <- linea");
+                        // System.out.println(" <- linea");
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -494,7 +497,7 @@ class CUP$parser$actions {
 		Object polygon = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
                         container.setPolygon((Polygon) polygon);
-                        System.out.println(" <- poligono");
+                        // System.out.println(" <- poligono");
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -545,7 +548,7 @@ class CUP$parser$actions {
 		Object color = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
                         RESULT = new DrawFour(x, y, r, (String)color);
-                        System.out.printf("draw4(%d, %d, %d, %s)", x, y, r, color);
+                        // System.out.printf("draw4(%d, %d, %d, %s)", x, y, r, color);
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw4",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -572,7 +575,7 @@ class CUP$parser$actions {
 		Object color = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
                         RESULT = new DrawFive(x, y, h, w, (String)color);
-                        System.out.printf("draw5(%d, %d, %d, %d, %s)", x, y, h, w, color);
+                        // System.out.printf("draw5(%d, %d, %d, %d, %s)", x, y, h, w, color);
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw5",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -602,7 +605,7 @@ class CUP$parser$actions {
 		Object color = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
                         RESULT = new Polygon(x, y, h, w, n, (String) color);
-                        System.out.printf("draw6(%d, %d, %d, %d, %d, %s)", x, y, h, w, n, color);
+                        // System.out.printf("draw6(%d, %d, %d, %d, %d, %s)", x, y, h, w, n, color);
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw6",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-12)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -617,7 +620,7 @@ class CUP$parser$actions {
 		Object animation = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
                         container.setAnimation((Animation) animation);
-                        System.out.println(" <- animar objeto anterior");
+                       //  System.out.println(" <- animar objeto anterior");
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("anim",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -647,7 +650,7 @@ class CUP$parser$actions {
 		Object kind = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
                         RESULT = new Animation(xf, yf, (String)kind);
-                        System.out.printf("opan(%d, %d, %s)", xf, yf, kind);
+                        // System.out.printf("opan(%d, %d, %s)", xf, yf, kind);
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("opan",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -866,6 +869,7 @@ class CUP$parser$actions {
     } /* end of method */
 
   /** Method splitting the generated action code into several parts. */
+  @RequiresApi(api = Build.VERSION_CODES.N)
   public final java_cup.runtime.Symbol CUP$parser$do_action(
     int                        CUP$parser$act_num,
     java_cup.runtime.lr_parser CUP$parser$parser,
