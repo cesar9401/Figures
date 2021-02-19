@@ -4,9 +4,10 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class ElementCount {
+public class ElementCount implements Serializable {
     private HashMap<String, Integer> figures;
     private HashMap<String, Integer> colors;
     private HashMap<String, Integer> animations;

@@ -1,6 +1,8 @@
 package com.cesar31.figures.reports;
 
-public class ReportError {
+import java.io.Serializable;
+
+public class ReportError implements Serializable {
     private String lexema;
     private int line;
     private int column;
@@ -51,5 +53,16 @@ public class ReportError {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "ReportError{" +
+                "lexema='" + lexema + '\'' +
+                ", line=" + line +
+                ", column=" + column +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

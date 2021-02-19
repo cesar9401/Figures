@@ -6,10 +6,11 @@ import androidx.annotation.RequiresApi;
 
 import com.cesar31.figures.reports.ElementCount;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FigureContainer {
+public class FigureContainer implements Serializable {
     private ElementCount count;
 
     private Figure current;

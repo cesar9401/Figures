@@ -3,4 +3,7 @@
     <string name="main_button">Compilar</string>
     <string name="input_text">Ingrese su accion</string>
     <string name="error_button">Reporte de Errores</string>
+    <string name="back_main">Regresar</string>
+    <string name="animate">Animar</string>
+    <string name="report">Reportes</string>
 </resources>

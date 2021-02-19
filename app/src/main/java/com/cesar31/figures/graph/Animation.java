@@ -1,6 +1,8 @@
 package com.cesar31.figures.graph;
 
-public class Animation {
+import java.io.Serializable;
+
+public class Animation implements Serializable {
     private Integer x;
     private Integer y;
     private String type;

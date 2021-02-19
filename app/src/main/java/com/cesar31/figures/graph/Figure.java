@@ -1,6 +1,8 @@
 package com.cesar31.figures.graph;
 
-public class Figure {
+import java.io.Serializable;
+
+public class Figure implements Serializable {
     private Integer x;
     private Integer y;
     private String color;
