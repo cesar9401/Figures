@@ -37,6 +37,9 @@ public class ErrorActivity extends AppCompatActivity {
         getDataFromMain();
     }
 
+    /*
+        Metodo para volver a activity_main
+     */
     private void backMain() {
         Intent mainActivity = new Intent(this, MainActivity.class);
         Bundle bundle = new Bundle();
@@ -45,6 +48,9 @@ public class ErrorActivity extends AppCompatActivity {
         startActivity(mainActivity);
     }
 
+    /*
+        Metodo que obtiene los elementos enviados desde MainActivity
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getDataFromMain() {
         Bundle data = getIntent().getExtras();

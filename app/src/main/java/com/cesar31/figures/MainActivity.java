@@ -21,8 +21,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Elementos de activity_main
     private EditText etInput;
     private Button btnCompile;
+    private Button btnClear;
     private String input;
 
     @Override
@@ -32,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         /* Componentes de activity main */
         etInput = findViewById(R.id.etInput);
-        btnCompile = findViewById(R.id.btnMain);
+        btnCompile = findViewById(R.id.btnCompile);
+        btnClear = findViewById(R.id.btnClear);
 
+        // onClick para btnCompile
         btnCompile.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -42,13 +46,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // OnClick para btnClear
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etInput.setText("");
+            }
+        });
+
+
         getData();
     }
 
+    // Accion de btnCompile
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void btnCompileAction() {
         input = etInput.getText().toString();
-        if(input != null) {
+        if(!input.isEmpty() && !input.trim().isEmpty()) {
             FigureLex lexer = new FigureLex(new StringReader(input));
             parser parser = new parser(lexer);
             try {
@@ -65,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+        Metodo para cambiar a la activity que muestra los dibujos
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getFigures(String input, FigureContainer container) {
         Intent drawActivity = new Intent(this, DrawActivity.class);
@@ -78,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(drawActivity);
     }
 
+    /*
+        Metodo para cambiar a la activity que muestra errores
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getErrors(List<ReportError> errors) {
         Intent errorActivity = new Intent(this, ErrorActivity.class);
@@ -91,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(errorActivity);
     }
 
+    /*
+        Obtener datos de otros activities, input
+     */
     private void getData() {
         Bundle data = getIntent().getExtras();
         if(data != null) {

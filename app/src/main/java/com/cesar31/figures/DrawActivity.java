@@ -4,21 +4,21 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.cesar31.figures.graph.FigureContainer;
-import com.cesar31.figures.reports.ReportError;
-
-import java.util.List;
 
 public class DrawActivity extends AppCompatActivity {
 
     private Button btnBackMain;
     private Button btnAnimate;
     private Button btnReport;
+    private FrameLayout layout;
 
     private String input;
     private FigureContainer container;
@@ -33,6 +33,7 @@ public class DrawActivity extends AppCompatActivity {
         btnAnimate = findViewById(R.id.btnAnimate);
         btnReport = findViewById(R.id.btnReport);
 
+        // OnClick para btnBackMain
         btnBackMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,29 +41,37 @@ public class DrawActivity extends AppCompatActivity {
             }
         });
 
+        // OnClick para btnReport
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Write your code here
+            }
+        });
+
+        // Recuperar datos de Main
         getDataMain();
+
+        // Agregamos a DrawPanel como hijo de layout
+        layout = findViewById(R.id.flDrawContainer);
+        layout.addView(new DrawPanel(this, this.container));
     }
 
+    /*
+        Metodo para obtener los objetos enviados desde MainActivity
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getDataMain() {
         Bundle data = getIntent().getExtras();
-        if(data != null) {
+        if (data != null) {
             this.input = (String) data.getSerializable("input");
             this.container = (FigureContainer) data.getSerializable("container");
-            this.container.getFour().forEach(f -> {
-                System.out.println(f.toString());
-            });
-
-            this.container.getFour().forEach(f -> {
-                System.out.println(f.toString());
-            });
-
-            this.container.getPolygon().forEach(f -> {
-                System.out.println(f.toString());
-            });
         }
     }
 
+    /*
+        Metodo para volver a la vista activity_main
+     */
     private void backMain() {
         Intent mainActivity = new Intent(this, MainActivity.class);
         Bundle bundle = new Bundle();
