@@ -20,35 +20,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/main_blue"
-        android:text="@string/back_main"
-        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/back_vector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDraw"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/photo_vector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAnimate"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnDrawBack" />
 
     <Button
         android:id="@+id/btnAnimate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@color/main_blue"
-        android:text="@string/animate"
-        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+
+        android:background="@drawable/animation_vector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnReport"
-        app:layout_constraintStart_toEndOf="@+id/btnDrawBack" />
+        app:layout_constraintStart_toEndOf="@+id/btnDraw" />
 
     <Button
         android:id="@+id/btnReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/main_blue"
-        android:text="@string/report"
-        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/report_vector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAnimate" />

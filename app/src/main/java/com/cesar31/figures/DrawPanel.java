@@ -33,11 +33,13 @@ public class DrawPanel extends View {
         paint.setStrokeWidth(5);
 
         this.container.getFour().forEach(f -> {
+            // Circulos
             if (f.getType().equals("circulo")) {
                 paint.setColor(getResources().getColor(getColor(f.getColor()), null));
                 canvas.drawCircle(f.getX(), f.getY(), f.getSide(), paint);
             }
 
+            // Cuadrados
             if (f.getType().equals("cuadrado")) {
                 paint.setColor(getResources().getColor(getColor(f.getColor()), null));
                 canvas.drawRect(f.getX(), f.getY(), f.getX() + f.getSide(), f.getY() + f.getSide(), paint);
@@ -45,17 +47,20 @@ public class DrawPanel extends View {
         });
 
         this.container.getFive().forEach(f -> {
+            // Rectangulos
             if (f.getType().equals("rectangulo")) {
                 paint.setColor(getResources().getColor(getColor(f.getColor()), null));
                 canvas.drawRect(f.getX(), f.getY(), f.getX() + f.getX2(), f.getY() + f.getY2(), paint);
             }
 
+            // Lineas
             if (f.getType().equals("linea")) {
                 paint.setColor(getResources().getColor(getColor(f.getColor()), null));
                 canvas.drawLine(f.getX(), f.getY(), f.getX2(), f.getY2(), paint);
             }
         });
 
+        // Poligonos
         this.container.getPolygon().forEach(f -> {
             drawPolygon(f, canvas, paint);
             canvas.drawPoint(f.getX(), f.getY(), paint);
@@ -69,11 +74,11 @@ public class DrawPanel extends View {
      * @param paint
      */
     public void drawPolygon(Polygon p, Canvas canvas, Paint paint) {
-        float scale_y = (float) p.getHeight() / (float) p.getWidth();
+        float scale = (float) p.getHeight() / (float) p.getWidth();
         canvas.save();
         canvas.translate(p.getX(), p.getY());
         canvas.rotate(270f);
-        canvas.scale(1f, scale_y);
+        canvas.scale(scale, 1f);
         int r = p.getWidth() / 2, n = p.getN();
         double rad = 2 * Math.PI / n;
         paint.setColor(getResources().getColor(getColor(p.getColor()), null));
