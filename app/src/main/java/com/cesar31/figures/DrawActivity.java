@@ -19,7 +19,7 @@ public class DrawActivity extends AppCompatActivity {
 
     private Button btnBackMain;
     private Button btnDraw;
-    private Button btnAnimate;
+    public Button btnAnimate;
     private Button btnReport;
 
     private String input;
@@ -68,13 +68,14 @@ public class DrawActivity extends AppCompatActivity {
             }
         });
 
-        // OnClick para btnAnimate
-        btnAnimate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Write your code here
-            }
+        /**
+         // OnClick para btnAnimate
+         btnAnimate.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+        // Write your code here
+        }
         });
+         **/
 
         // OnClick para btnReport
         btnReport.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +110,7 @@ public class DrawActivity extends AppCompatActivity {
     }
 
     /**
-     *  Metodo para cambiar a DrawFragment
+     * Metodo para cambiar a DrawFragment
      */
     private void changeToDrawFragment() {
         // Bundle para drawFragment

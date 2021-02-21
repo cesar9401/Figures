@@ -2,6 +2,7 @@ package com.cesar31.figures;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
+import com.cesar31.figures.graph.DrawFour;
 import com.cesar31.figures.graph.FigureContainer;
 import com.cesar31.figures.graph.Polygon;
 
@@ -36,6 +38,7 @@ public class DrawPanel extends View {
             // Circulos
             if (f.getType().equals("circulo")) {
                 paint.setColor(getResources().getColor(getColor(f.getColor()), null));
+
                 canvas.drawCircle(f.getX(), f.getY(), f.getSide(), paint);
             }
 
@@ -65,6 +68,21 @@ public class DrawPanel extends View {
             drawPolygon(f, canvas, paint);
             canvas.drawPoint(f.getX(), f.getY(), paint);
         });
+    }
+
+    public void movimiento() {
+        System.out.println("movimiento");
+        DrawFour circulo = this.container.getFour().get(0);
+        int x = circulo.getAnimation().getX();
+        int y = circulo.getAnimation().getX();
+        int speed = 25;
+
+        int current_x = circulo.getX();
+        while(current_x != x) {
+            current_x += speed;
+            circulo.setX(current_x);
+            invalidate();
+        }
     }
 
     /**
