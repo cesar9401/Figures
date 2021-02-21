@@ -6,13 +6,17 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
-import com.cesar31.figures.graph.DrawFour;
+import com.cesar31.figures.graph.Figure;
 import com.cesar31.figures.graph.FigureContainer;
 import com.cesar31.figures.graph.Polygon;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DrawPanel extends View {
 
@@ -25,6 +29,7 @@ public class DrawPanel extends View {
 
     /**
      * OnDraw para dibujar
+     *
      * @param canvas
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -38,7 +43,6 @@ public class DrawPanel extends View {
             // Circulos
             if (f.getType().equals("circulo")) {
                 paint.setColor(getResources().getColor(getColor(f.getColor()), null));
-
                 canvas.drawCircle(f.getX(), f.getY(), f.getSide(), paint);
             }
 
@@ -70,23 +74,66 @@ public class DrawPanel extends View {
         });
     }
 
-    public void movimiento() {
-        System.out.println("movimiento");
-        DrawFour circulo = this.container.getFour().get(0);
-        int x = circulo.getAnimation().getX();
-        int y = circulo.getAnimation().getX();
-        int speed = 25;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void startAnimations() {
+        int count = 0;
+        List<Figure> figures = new ArrayList<>();
+        figures.addAll(this.container.getFour());
+        figures.addAll(this.container.getFive());
+        figures.addAll(this.container.getPolygon());
 
-        int current_x = circulo.getX();
-        while(current_x != x) {
-            current_x += speed;
-            circulo.setX(current_x);
-            invalidate();
+        for (Figure figure : figures) {
+            if (figure.isAnimated()) {
+                if (figure.getAnimation().getType().equals("linea")) {
+                    lineAnimation(figure);
+                }
+            }
+        }
+    }
+
+    public void lineAnimation(Figure figure) {
+        int count = 0;
+        int x = 0, y = 0;
+        float x0 = figure.getX();
+        float y0 = figure.getY();
+        float xf = figure.getAnimation().getX();
+        float yf = figure.getAnimation().getY();
+
+        double angle = Math.atan2(yf - y0, xf - x0);
+
+        while (x != xf || y != yf) {
+            count++;
+            if (x != xf) {
+                x0 += Math.cos(angle);
+                x = (int) Math.floor(x0);
+            } else {
+                x = (int) xf;
+            }
+
+            if (y != yf) {
+                y0 += Math.sin(angle);
+                y = (int) Math.floor(y0);
+            } else {
+                y = (int) yf;
+            }
+
+            int finalX = x;
+            int finalY = y;
+            Figure finalFigure = figure;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finalFigure.setX(finalX);
+                    finalFigure.setY(finalY);
+                    invalidate();
+                }
+            }, count);
         }
     }
 
     /**
      * Metodo para dibujar poligonos
+     *
      * @param p
      * @param canvas
      * @param paint
@@ -113,6 +160,7 @@ public class DrawPanel extends View {
 
     /**
      * Metodo para obtener color segun el color de la figura
+     *
      * @param clr
      * @return
      */

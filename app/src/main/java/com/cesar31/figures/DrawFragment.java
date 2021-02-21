@@ -1,7 +1,9 @@
 package com.cesar31.figures;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -42,10 +44,12 @@ public class DrawFragment extends Fragment {
         panel = new DrawPanel(this.getContext(), this.figures);
         btnAnimate1 = getActivity().findViewById(R.id.btnAnimate);
         btnAnimate1.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                panel.movimiento();
-                System.out.println("animate");
+                // Code for animations
+                panel.startAnimations();
+                btnAnimate1.setEnabled(false);
             }
         });
 
