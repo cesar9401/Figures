@@ -6,6 +6,10 @@
     <string name="back_main">Regresar</string>
     <string name="animate">Animar</string>
     <string name="report">Reportes</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="report_Title">Reporte de Elementos</string>
+    <string name="report_operators">Reporte de Operadores Matematicos</string>
+    <string name="report_colors">Repores de Colores Usados</string>
+    <string name="report_figures">Repores de Objetos Usados</string>
+    <string name="report_animations">Repores de Animaciones hechas</string>
+
 </resources>

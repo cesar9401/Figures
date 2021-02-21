@@ -3,22 +3,19 @@ package com.cesar31.figures;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
 import com.cesar31.figures.graph.FigureContainer;
 
 public class DrawActivity extends AppCompatActivity {
 
-    private FragmentTransaction transaction;
     private Fragment drawFragment;
+    private Fragment reportFragment;
 
     private Button btnBackMain;
     private Button btnDraw;
@@ -40,8 +37,20 @@ public class DrawActivity extends AppCompatActivity {
         btnAnimate = findViewById(R.id.btnAnimate);
         btnReport = findViewById(R.id.btnReport);
 
-        // Fragments
+        // inicializar Fragments
         drawFragment = new DrawFragment();
+        reportFragment = new ReportFragment();
+
+        // Recuperar datos de Main
+        getDataMain();
+
+        // Bundle para drawFragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("container", this.container);
+        drawFragment.setArguments(bundle);
+
+        // Cambiamos a DrawFragment
+        getSupportFragmentManager().beginTransaction().add(R.id.flDrawContainer, drawFragment).commit();
 
         // OnClick para btnBackMain
         btnBackMain.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +64,11 @@ public class DrawActivity extends AppCompatActivity {
         btnDraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Write your code here
+                changeToDrawFragment();
             }
         });
 
+        // OnClick para btnAnimate
         btnAnimate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,24 +80,13 @@ public class DrawActivity extends AppCompatActivity {
         btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Write your code here
+                changeToReportFragment();
             }
         });
-
-        // Recuperar datos de Main
-        getDataMain();
-
-        // Bundle para drawFragment
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("container", this.container);
-        drawFragment.setArguments(bundle);
-
-        // Agregamos fragment principal
-        getSupportFragmentManager().beginTransaction().add(R.id.flDrawContainer, drawFragment).commit();
     }
 
-    /*
-        Metodo para obtener los objetos enviados desde MainActivity
+    /**
+     * Recuperar objetos desde activity_main
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getDataMain() {
@@ -98,8 +97,8 @@ public class DrawActivity extends AppCompatActivity {
         }
     }
 
-    /*
-        Metodo para volver a la vista activity_main
+    /**
+     * Metodo para volver a activity_main
      */
     private void backMain() {
         Intent mainActivity = new Intent(this, MainActivity.class);
@@ -107,5 +106,43 @@ public class DrawActivity extends AppCompatActivity {
         bundle.putSerializable("input", this.input);
         mainActivity.putExtras(bundle);
         startActivity(mainActivity);
+    }
+
+    /**
+     *  Metodo para cambiar a DrawFragment
+     */
+    private void changeToDrawFragment() {
+        // Bundle para drawFragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("container", this.container);
+        drawFragment.setArguments(bundle);
+
+        // Cambiamos a DrawFragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.flDrawContainer, drawFragment).commit();
+
+        // Mostrar btnAnimate
+        btnAnimate.setVisibility(View.VISIBLE);
+
+        // Ocultar btnDraw
+        btnDraw.setVisibility(View.GONE);
+    }
+
+    /**
+     * Metodo para cambiar a ReportFragment para ver los reportes
+     */
+    private void changeToReportFragment() {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("count", this.container.getCount());
+        bundle.putSerializable("input", this.input);
+        this.reportFragment.setArguments(bundle);
+
+        // Cambiamos a ReportFragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.flDrawContainer, reportFragment).commit();
+
+        // Mostrar btnDraw
+        btnDraw.setVisibility(View.VISIBLE);
+
+        // Ocultar btnAnimate
+        btnAnimate.setVisibility(View.GONE);
     }
 }

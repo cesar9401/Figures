@@ -33,12 +33,13 @@ public class DrawFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_draw, container, false);
+
+        // Vista para canvas
         layout = view.findViewById(R.id.flCanvasContainer);
         DrawPanel panel = new DrawPanel(this.getContext(), this.figures);
         layout.addView(panel);
 
         // Inflate the layout for this fragment
         return view;
-
     }
 }

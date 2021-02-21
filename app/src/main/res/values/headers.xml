@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Table operators -->
+    <string-array name="header_operators">
+        <item>Operador</item>
+        <item>Linea</item>
+        <item>Columna</item>
+        <item>Occurencia</item>
+    </string-array>
+
+    <string-array name="header_colors">
+        <item>Color</item>
+        <item>Cantidad</item>
+    </string-array>
+
+    <string-array name="header_figures">
+        <item>Objeto</item>
+        <item>Cantidad</item>
+    </string-array>
+
+    <string-array name="header_animations">
+        <item>Animacion</item>
+        <item>Cantidad</item>
+    </string-array>
+
+    <string-array name="header_errors">
+        <item>Lexema</item>
+        <item>Linea</item>
+        <item>Columna</item>
+        <item>Tipo</item>
+        <item>Descripcion</item>
+    </string-array>
+</resources>

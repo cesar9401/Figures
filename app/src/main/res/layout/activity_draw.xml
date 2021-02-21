@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:background="@drawable/photo_vector"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAnimate"
         app:layout_constraintStart_toEndOf="@+id/btnDrawBack" />
