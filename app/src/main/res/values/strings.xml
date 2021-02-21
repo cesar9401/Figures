@@ -11,5 +11,6 @@
     <string name="report_colors">Repores de Colores Usados</string>
     <string name="report_figures">Repores de Objetos Usados</string>
     <string name="report_animations">Repores de Animaciones hechas</string>
+    <string name="report_errors">Reporte de Errores</string>
 
 </resources>

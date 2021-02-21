@@ -38,6 +38,7 @@
         android:layout_marginBottom="24dp"
         android:hint="@string/input_text"
         android:textAlignment="center"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/btnCompile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

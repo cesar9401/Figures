@@ -144,11 +144,11 @@ draw    ::=     GRAPH CIRCLE draw4:circle
                         // System.out.println(" <- poligono");
                 :}
                 | error draw4
-                {: System.out.println("draw ::= error draw4"); :}
+                {: //System.out.println("draw ::= error draw4"); :}
                 | error draw5
-                {: System.out.println("draw ::= error draw5"); :}
+                {: //System.out.println("draw ::= error draw5"); :}
                 | error draw6
-                {: System.out.println("draw ::= error draw6"); :}
+                {: //System.out.println("draw ::= error draw6"); :}
                 ;
 
 draw4   ::=     LPAREN s:x COMMA s:y COMMA s:r COMMA clr:color RPAREN
@@ -178,7 +178,7 @@ anim    ::=     ANIMT OBJ ANT opan:animation
                        //  System.out.println(" <- animar objeto anterior");
                 :}
                 | error opan
-                {: System.out.println("anim ::= error opan"); :}
+                {: //System.out.println("anim ::= error opan"); :}
                 ;
 
 opan    ::=     LPAREN s:xf COMMA s:yf COMMA kanim:kind RPAREN
@@ -191,9 +191,9 @@ opan    ::=     LPAREN s:xf COMMA s:yf COMMA kanim:kind RPAREN
 clr     ::=     COLOR:color
                 {: RESULT = color; :}
                 | error draw
-                {: System.out.println("clr ::= error draw"); :}
+                {: //System.out.println("clr ::= error draw"); :}
                 | error anim
-                {: System.out.println("clr ::= error draw"); :}
+                {: //System.out.println("clr ::= error draw"); :}
                 ;
 
 kanim   ::=     CURVE:t1
@@ -201,7 +201,7 @@ kanim   ::=     CURVE:t1
                 | LINE:t2
                 {: RESULT = t2; :}
                 | error
-                {: System.out.println("kanim ::= error"); :}
+                {: //System.out.println("kanim ::= error"); :}
                 ;
 
 s       ::=     s:n1 PLUS t:n2
@@ -211,7 +211,7 @@ s       ::=     s:n1 PLUS t:n2
                 | t:n1
                 {: RESULT = n1; :}
                 | error
-                {: System.out.println("s ::= error"); :}
+                {: //System.out.println("s ::= error"); :}
                 ;
 
 t       ::=     t:n1 TIMES u:n2

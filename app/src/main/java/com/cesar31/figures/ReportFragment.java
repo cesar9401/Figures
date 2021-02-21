@@ -87,7 +87,7 @@ public class ReportFragment extends Fragment {
             elements.add(String.valueOf(o.getLine()));
             elements.add(String.valueOf(o.getColumn()));
             elements.add(o.getInstance());
-            table.addRowTable((ArrayList<String>) elements);
+            table.addRowTable(elements);
         });
     }
 
@@ -99,7 +99,7 @@ public class ReportFragment extends Fragment {
             List<String> elements = new ArrayList<>();
             elements.add(s);
             elements.add(String.valueOf(i));
-            table.addRowTable((ArrayList<String>) elements);
+            table.addRowTable(elements);
         });
     }
 
@@ -111,7 +111,7 @@ public class ReportFragment extends Fragment {
             List<String> elements = new ArrayList<>();
             elements.add(s);
             elements.add(String.valueOf(i));
-            table.addRowTable((ArrayList<String>) elements);
+            table.addRowTable(elements);
         });
     }
 
@@ -123,7 +123,7 @@ public class ReportFragment extends Fragment {
             List<String> elements = new ArrayList<>();
             elements.add(s);
             elements.add(String.valueOf(i));
-            table.addRowTable((ArrayList<String>) elements);
+            table.addRowTable(elements);
         });
     }
 }

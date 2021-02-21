@@ -507,7 +507,7 @@ class CUP$parser$actions {
           case 11: // draw ::= error draw4 
             {
               Object RESULT =null;
-		 System.out.println("draw ::= error draw4"); 
+		 //System.out.println("draw ::= error draw4"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -516,7 +516,7 @@ class CUP$parser$actions {
           case 12: // draw ::= error draw5 
             {
               Object RESULT =null;
-		 System.out.println("draw ::= error draw5"); 
+		 //System.out.println("draw ::= error draw5"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -525,7 +525,7 @@ class CUP$parser$actions {
           case 13: // draw ::= error draw6 
             {
               Object RESULT =null;
-		 System.out.println("draw ::= error draw6"); 
+		 //System.out.println("draw ::= error draw6"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("draw",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -630,7 +630,7 @@ class CUP$parser$actions {
           case 18: // anim ::= error opan 
             {
               Object RESULT =null;
-		 System.out.println("anim ::= error opan"); 
+		 //System.out.println("anim ::= error opan"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("anim",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -672,7 +672,7 @@ class CUP$parser$actions {
           case 21: // clr ::= error draw 
             {
               Object RESULT =null;
-		 System.out.println("clr ::= error draw"); 
+		 //System.out.println("clr ::= error draw"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("clr",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -681,7 +681,7 @@ class CUP$parser$actions {
           case 22: // clr ::= error anim 
             {
               Object RESULT =null;
-		 System.out.println("clr ::= error draw"); 
+		 //System.out.println("clr ::= error draw"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("clr",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -714,7 +714,7 @@ class CUP$parser$actions {
           case 25: // kanim ::= error 
             {
               Object RESULT =null;
-		 System.out.println("kanim ::= error"); 
+		 //System.out.println("kanim ::= error"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("kanim",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -765,7 +765,7 @@ class CUP$parser$actions {
           case 29: // s ::= error 
             {
               Integer RESULT =null;
-		 System.out.println("s ::= error"); 
+		 //System.out.println("s ::= error"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("s",9, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

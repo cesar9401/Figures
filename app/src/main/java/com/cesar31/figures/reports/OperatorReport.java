@@ -1,9 +1,5 @@
 package com.cesar31.figures.reports;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import com.cesar31.figures.lexerandparser.FigureLex;
 
 import java.io.IOException;

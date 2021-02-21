@@ -16,13 +16,15 @@ public class HandleError {
     }
 
     public void setError(Symbol symbol, String typeE, List<String> expectedTokens) {
-        ReportError error = new ReportError((String) symbol.value, symbol.left, symbol.right);
-        String type = typeE.equals("ERROR") ? "Lexico" : "Sintactico";
-        System.out.println("type = " + type);
-        error.setType(type);
-        error.setDescription(getDescription(type, expectedTokens));
+        if(symbol.sym != 0) {
+            ReportError error = new ReportError((String) symbol.value, symbol.left, symbol.right);
+            String type = typeE.equals("ERROR") ? "Lexico" : "Sintactico";
+            System.out.println("type = " + type);
+            error.setType(type);
+            error.setDescription(getDescription(type, expectedTokens));
 
-        errors.add(error);
+            errors.add(error);
+        }
     }
 
     private String getDescription(String type, List<String> expectedTokens) {

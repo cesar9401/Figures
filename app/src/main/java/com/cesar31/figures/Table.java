@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Table {
 
@@ -57,7 +58,7 @@ public class Table {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void addRowTable(ArrayList<String> elements) {
+    public void addRowTable(List<String> elements) {
         TableRow.LayoutParams layoutCell;
         TableRow.LayoutParams layoutRow = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
         TableRow r = new TableRow(this.activity);
