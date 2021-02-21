@@ -1,5 +1,9 @@
 package com.cesar31.figures.reports;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.cesar31.figures.lexerandparser.FigureLex;
 
 import java.io.IOException;
@@ -23,7 +27,7 @@ public class OperatorReport {
         while (true) {
             try {
                 Symbol symbol = lex.next_token();
-                if (symbol.value == null) {
+                if (symbol.sym == 0) {
                     break;
                 }
 
@@ -34,7 +38,7 @@ public class OperatorReport {
         }
 
         for (int i = 0; i < sym.size(); i++) {
-            if (i - 1 > 0 && i + i < sym.size()) {
+            if (i - 1 > 0 && i + 1 < sym.size()) {
                 if (sym.get(i).value.equals("+")) {
                     operators.add(new Operator("Suma", sym.get(i).left, sym.get(i).right, sym.get(i - 1).value + " + " + sym.get(i + 1).value));
                 }
