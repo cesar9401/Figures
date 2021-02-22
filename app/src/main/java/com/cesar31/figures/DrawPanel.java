@@ -11,6 +11,7 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
+import com.cesar31.figures.graph.Animation;
 import com.cesar31.figures.graph.Figure;
 import com.cesar31.figures.graph.FigureContainer;
 import com.cesar31.figures.graph.Polygon;
@@ -21,6 +22,9 @@ import java.util.List;
 public class DrawPanel extends View {
 
     private FigureContainer container;
+    private int width;
+    private int height;
+    private int count;
 
     public DrawPanel(Context context, FigureContainer container) {
         super(context);
@@ -38,6 +42,10 @@ public class DrawPanel extends View {
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setStrokeWidth(5);
+
+        this.width = canvas.getWidth();
+        this.height = canvas.getHeight();
+        this.count = 0;
 
         this.container.getFour().forEach(f -> {
             // Circulos
@@ -86,13 +94,54 @@ public class DrawPanel extends View {
             if (figure.isAnimated()) {
                 if (figure.getAnimation().getType().equals("linea")) {
                     lineAnimation(figure);
+                } else {
+                    // Animacion de tipo curva
+                    curveAnimation(figure);
                 }
             }
         }
     }
 
+    /**
+     * Metodo para animaciones en forma de curva
+     * @param figure
+     */
+    public void curveAnimation(Figure figure) {
+        float x0 = figure.getX();
+        float y0 = figure.getY();
+        float xf = figure.getAnimation().getX();
+        float yf = figure.getAnimation().getY();
+        int n = 50;
+        double rad = Math.PI / n;
+        double tetha0 = Math.atan2(y0, x0);
+
+        int h = (int) ((x0 + xf) / 2);
+        int k = (int) ((y0 + yf) / 2);
+
+        int d = (int) Math.sqrt(Math.pow((xf - x0), 2) + Math.pow((yf - y0), 2));
+        int r = d / 2;
+
+        for (int i = 0; i <=n; i++) {
+            int x = h + (int) (r * Math.cos(Math.PI + tetha0 + rad * i));
+            int y = k + (int) (r * Math.sin(Math.PI + tetha0 + rad * i));
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    figure.setX(x);
+                    figure.setY(y);
+                    invalidate();
+                }
+            }, 50 * i);
+        }
+    }
+
+    /**
+     * Metodo para animaciones en forma lineal
+     * @param figure
+     */
     public void lineAnimation(Figure figure) {
-        int count = 0;
+        //int count = 0;
         int x = 0, y = 0;
         float x0 = figure.getX();
         float y0 = figure.getY();
