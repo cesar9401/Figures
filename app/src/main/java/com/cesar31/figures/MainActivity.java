@@ -62,20 +62,19 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void btnCompileAction() {
         input = etInput.getText().toString();
-        if(!input.isEmpty() && !input.trim().isEmpty()) {
-            FigureLex lexer = new FigureLex(new StringReader(input));
-            parser parser = new parser(lexer);
-            try {
-                parser.parse();
-                if(parser.isParsed()) {
-                    // Input aceptado
-                    getFigures(input, parser.getContainer());
-                } else {
-                    getErrors(parser.getHandleError().getErrors());
-                }
-            } catch (Exception e) {
-                e.printStackTrace(System.out);
+        FigureLex lexer = new FigureLex(new StringReader(input));
+        parser parser = new parser(lexer);
+        try {
+            parser.parse();
+            if (parser.isParsed()) {
+                // Input aceptado
+                getFigures(input, parser.getContainer());
+            } else {
+                getErrors(parser.getHandleError().getErrors());
             }
+        } catch (Exception e) {
+            getErrors(parser.getHandleError().getErrors());
+            //e.printStackTrace(System.out);
         }
     }
 
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void getData() {
         Bundle data = getIntent().getExtras();
-        if(data != null) {
+        if (data != null) {
             this.input = (String) getIntent().getSerializableExtra("input");
             etInput.setText(this.input);
         }

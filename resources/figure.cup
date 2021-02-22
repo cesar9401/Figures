@@ -31,8 +31,8 @@ parser code {:
                 /* parsed */
                 this.parsed = false;
 
-                System.out.println("unrecovered_syntax_error");
-                System.out.println("cur_token: " + symbl_name_from_id(cur_token.sym));
+                //System.out.println("unrecovered_syntax_error");
+                //System.out.println("cur_token: " + symbl_name_from_id(cur_token.sym));
 	}
 
 	public void report_error(String message, Object info) {
@@ -40,18 +40,18 @@ parser code {:
                 this.parsed = false;
                 /**/
 
-                System.out.println("report_error");
-                System.out.println("Message: " + message);
-                System.out.println("Object info: " + info);
+                //System.out.println("report_error");
+                //System.out.println("Message: " + message);
+                //System.out.println("Object info: " + info);
 	}
 
 	public void report_fatal_error(String message, Object info) {
                 /* parsed */
                 this.parsed = false;
 
-                System.out.println("report_fatal_error");
-                System.out.println("Message: " + message);
-                System.out.println("Object info: " + info);
+                //System.out.println("report_fatal_error");
+                //System.out.println("Message: " + message);
+                //System.out.println("Object info: " + info);
 
                 /* Armando reportes de errores */
                 List<String> expected = new ArrayList<>();
@@ -115,7 +115,7 @@ expr    ::=     draw anim expr
                 | draw anim
                 | draw expr
                 | draw
-                | error expr
+                | error
                 ;
 
 draw    ::=     GRAPH CIRCLE draw4:circle
@@ -190,10 +190,8 @@ opan    ::=     LPAREN s:xf COMMA s:yf COMMA kanim:kind RPAREN
 
 clr     ::=     COLOR:color
                 {: RESULT = color; :}
-                | error draw
-                {: //System.out.println("clr ::= error draw"); :}
-                | error anim
-                {: //System.out.println("clr ::= error draw"); :}
+                | error
+                {: //System.out.println("clr ::= error"); :}
                 ;
 
 kanim   ::=     CURVE:t1
