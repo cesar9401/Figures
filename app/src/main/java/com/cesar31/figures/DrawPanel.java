@@ -106,7 +106,7 @@ public class DrawPanel extends View {
      * Metodo para animaciones en forma de curva
      * @param figure
      */
-    public void curveAnimation(Figure figure) {
+    private void curveAnimation(Figure figure) {
         float x0 = figure.getX();
         float y0 = figure.getY();
         float xf = figure.getAnimation().getX();
@@ -140,7 +140,7 @@ public class DrawPanel extends View {
      * Metodo para animaciones en forma lineal
      * @param figure
      */
-    public void lineAnimation(Figure figure) {
+    private void lineAnimation(Figure figure) {
         //int count = 0;
         int x = 0, y = 0;
         float x0 = figure.getX();
@@ -187,7 +187,7 @@ public class DrawPanel extends View {
      * @param canvas
      * @param paint
      */
-    public void drawPolygon(Polygon p, Canvas canvas, Paint paint) {
+    private void drawPolygon(Polygon p, Canvas canvas, Paint paint) {
         float scale = (float) p.getHeight() / (float) p.getWidth();
         canvas.save();
         canvas.translate(p.getX(), p.getY());
